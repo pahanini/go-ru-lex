@@ -1,8 +1,8 @@
 package rulex
 
 import (
-	"errors"
 	"regexp"
+	"fmt"
 )
 
 const (
@@ -31,7 +31,7 @@ var validWord = regexp.MustCompile("^[а-яё]{1,}$")
 // - *ь, *ъ
 func Phonemize(word string) ([]Phoneme, error) {
 	if !validWord.MatchString(word) {
-		return nil, errors.New("invalid word, lower russian text expected")
+		return nil, fmt.Sprintf("invalid word '%v', lower russian text expected", word)
 	}
 	pp := make([]Phoneme, 0)
 	rr := []rune(word)
